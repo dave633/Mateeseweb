@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Galerie</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item active">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <main class="links-container" style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <div style="text-align: center; margin-top: 3rem; margin-bottom: 5rem;">
+            <h1 style="font-family: 'Orbitron', sans-serif; color: #10b981; font-size: 4rem; text-shadow: 0 0 30px rgba(16, 185, 129, 0.3); margin-bottom: 1.5rem; letter-spacing: 2px;">Galerie ze serveru</h1>
+            <p style="color: var(--text-muted); font-size: 1.25rem; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.6;">Střípky z našich světů, eventů a společných staveb.</p>
+        </div>
+
+        <!-- 3-Column Grid for Maximum Visibility -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 100%; max-width: 1300px; margin-bottom: 8rem; padding: 0 20px;">
+            <script>
+                for(let i = 1; i <= 15; i++) {
+                    document.write(`
+                        <div class="gallery-item fade-in" style="transition-delay: ${i * 0.05}s;">
+                            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                            <span class="placeholder-text">FOTKA BUDE BRZY DOPLNĚNA</span>
+                            <div class="gallery-overlay">
+                                <span class="overlay-text">Připravujeme obsah</span>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+
+        <footer class="site-footer fade-in" style="transition-delay: 0.8s;">
+            <div class="footer-line"></div>
+            <p class="footer-text">© 2026 MATESCZ · VŠECHNA PRÁVA VYHRAZENA</p>
+        </footer>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Full size">
+    </div>
+
+    <script>
+        function openLightbox(src, alt) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            img.alt = alt;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

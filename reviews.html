@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Hodnocení</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="blob"></div>
+
+    <main style="padding-top: 120px; padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; min-height: 100vh;">
+        <div class="hero-content" style="text-align: center;">
+            <div class="text-container">
+                <div class="title-container">
+                    <h1><span class="highlight">Hodnocení</span></h1>
+                </div>
+                <div style="max-width: 1000px; margin: 2rem auto; padding: 0 2rem; text-align: left; width: 100%;">
+                    <div id="reviewSection">
+                        <div class="add-review-cta" style="background: rgba(16, 185, 129, 0.05); border-radius: 30px; border: 1px dashed rgba(16, 185, 129, 0.3); padding: 3rem; text-align: center;">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Chceš mě ohodnotit?</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 20px;">Pro přidání hodnocení se prosím přihlas svým účtem vpravo nahoře v menu.</p>
+                            <button class="auth-btn login-trigger" style="max-width: 200px; margin: 0 auto; background: var(--primary); color: #fff; padding: 0.8rem 1.5rem; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;" onclick="document.querySelector('.login-trigger').click()">Přihlásit se</button>
+                        </div>
+                    </div>
+                    <h2 style="margin-top: 4rem; color: white;">Co o mně říkají ostatní:</h2>
+                    <div id="reviewsContainer" class="reviews-grid"></div>
+                </div>
+                <a href="index.html" class="btn">Zpět na úvod</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>

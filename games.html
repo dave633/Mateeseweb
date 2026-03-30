@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Herní Centrum</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item active">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="blob"></div>
+
+    <main class="links-container">
+        <!-- Header -->
+        <div class="links-header fade-in floating" style="margin-bottom: 3rem;">
+            <svg class="social-icon-main" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: #f5af02;">
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+            </svg>
+            <h1><span style="background: linear-gradient(90deg, #f5af02, #ff8800); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">HERNÍ CENTRUM</span></h1>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="ig-profiles-grid">
+            
+            <!-- Neon Breakout -->
+            <section class="game-card-section fade-in" style="transition-delay: 0.2s;">
+                <style>
+                    #breakout-card:hover {
+                        background: rgba(245, 175, 2, 0.05) !important;
+                        border-color: #f5af02 !important;
+                        box-shadow: 0 0 30px rgba(245, 175, 2, 0.2);
+                    }
+                    #breakout-card .ig-profile-avatar-img {
+                        border-color: rgba(245, 175, 2, 0.2) !important;
+                        background: #000;
+                        padding: 10px;
+                        border-radius: 15px;
+                    }
+                    #breakout-card:hover .ig-profile-avatar-img {
+                        border-color: #f5af02 !important;
+                        transform: scale(1.05);
+                        box-shadow: 0 0 15px rgba(245, 175, 2, 0.3);
+                    }
+                </style>
+                <div class="ig-profile-item" id="breakout-card">
+                    <div class="ig-profile-main-info">
+                        <div class="ig-profile-avatar-img" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px;">
+                            <svg viewBox="0 0 24 24" fill="#f5af02" width="40" height="40">
+                                <rect x="2" y="20" width="20" height="2" rx="1" />
+                                <circle cx="12" cy="14" r="2" />
+                                <rect x="4" y="4" width="4" height="2" rx="0.5" />
+                                <rect x="10" y="4" width="4" height="2" rx="0.5" />
+                                <rect x="16" y="4" width="4" height="2" rx="0.5" />
+                            </svg>
+                        </div>
+                        <div class="ig-profile-info">
+                            <h4>Neon Breakout</h4>
+                            <span>Rozbij všechny bloky!</span>
+                        </div>
+                    </div>
+                    <a href="breakout.html" class="ig-follow-btn" style="background: #f5af02; color: #000 !important; font-weight: 900; border: none; box-shadow: 0 4px 15px rgba(245, 175, 2, 0.3);">
+                        HRÁT
+                    </a>
+                </div>
+            </section>
+
+            <!-- Neon Snake -->
+            <section class="game-card-section fade-in" style="transition-delay: 0.4s; margin-top: 2rem;">
+                <style>
+                    #snake-card:hover {
+                        background: rgba(16, 185, 129, 0.05) !important;
+                        border-color: #10b981 !important;
+                        box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+                    }
+                    #snake-card .ig-profile-avatar-img {
+                        border-color: rgba(16, 185, 129, 0.2) !important;
+                        background: #000;
+                        padding: 10px;
+                        border-radius: 15px;
+                    }
+                    #snake-card:hover .ig-profile-avatar-img {
+                        border-color: #10b981 !important;
+                        transform: scale(1.05);
+                        box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+                    }
+                </style>
+                <div class="ig-profile-item" id="snake-card">
+                    <div class="ig-profile-main-info">
+                        <div class="ig-profile-avatar-img" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px;">
+                            <svg viewBox="0 0 24 24" fill="#10b981" width="40" height="40">
+                                <path d="M7 7h10v2H7V7zm3 4h7v2h-7v-2zM4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <circle cx="18" cy="12" r="1.5" fill="#fff" />
+                            </svg>
+                        </div>
+                        <div class="ig-profile-info">
+                            <h4>Neon Snake</h4>
+                            <span>Klasika v neonovém kabátu.</span>
+                        </div>
+                    </div>
+                    <a href="snake.html" class="ig-follow-btn" style="background: #10b981; color: #000 !important; font-weight: 900; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                        HRÁT
+                    </a>
+                </div>
+            </section>
+
+            <!-- Geometry Jump -->
+            <section class="game-card-section fade-in" style="transition-delay: 0.6s; margin-top: 2rem;">
+                <style>
+                    #geometry-card:hover {
+                        background: rgba(0, 162, 255, 0.05) !important;
+                        border-color: #00A2FF !important;
+                        box-shadow: 0 0 30px rgba(0, 162, 255, 0.2);
+                    }
+                    #geometry-card .ig-profile-avatar-img {
+                        border-color: rgba(0, 162, 255, 0.2) !important;
+                        background: #000;
+                        padding: 10px;
+                        border-radius: 15px;
+                    }
+                    #geometry-card:hover .ig-profile-avatar-img {
+                        border-color: #00A2FF !important;
+                        transform: scale(1.05);
+                        box-shadow: 0 0 15px rgba(0, 162, 255, 0.3);
+                    }
+                </style>
+                <div class="ig-profile-item" id="geometry-card">
+                    <div class="ig-profile-main-info">
+                        <div class="ig-profile-avatar-img" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px;">
+                            <svg viewBox="0 0 24 24" fill="#00A2FF" width="40" height="40">
+                                <rect x="4" y="14" width="6" height="6" fill="#00A2FF" rx="1" />
+                                <path d="M14 20l4-8 4 8h-8z" fill="#00A2FF" />
+                                <path d="M2 22h20" stroke="#00A2FF" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="ig-profile-info">
+                            <h4>Geometry Jump</h4>
+                            <span>Skákej přes překážky!</span>
+                        </div>
+                    </div>
+                    <a href="geometry.html" class="ig-follow-btn" style="background: #00A2FF; color: #000 !important; font-weight: 900; border: none; box-shadow: 0 4px 15px rgba(0, 162, 255, 0.3);">
+                        HRÁT
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer link back -->
+        <div class="fade-in" style="margin-top: 6rem; text-align: center; transition-delay: 0.8s;">
+            <a href="index.html" class="nav-brand" style="display: inline-flex; text-decoration: none;">
+                <span style="font-family: 'Orbitron', sans-serif;">ZPĚT NA ÚVOD</span>
+            </a>
+            <p style="color: rgba(255,255,255,0.2); margin-top: 2rem; font-size: 0.75rem; font-family: 'Orbitron', sans-serif; letter-spacing: 2px;">© 2026 MATESCZ · VŠECHNA PRÁVA VYHRAZENA</p>
+        </div>
+
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>

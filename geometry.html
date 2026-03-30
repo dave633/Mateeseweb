@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Hra - Geometry Jump</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        #game-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #00A2FF;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 162, 255, 0.2);
+            overflow: hidden;
+            margin-top: 2rem;
+            width: 800px;
+            height: 400px;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+        }
+
+        .game-overlay h2 {
+            font-size: 3rem;
+            color: #00A2FF;
+            text-shadow: 0 0 20px rgba(0, 162, 255, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            background: #00A2FF;
+            color: #000;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 1rem;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 162, 255, 0.4);
+        }
+
+        .stats {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: #00A2FF;
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item active">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <main class="links-container" style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <div class="links-header fade-in floating" style="margin-bottom: 0rem;">
+            <h1><span class="social-gradient-text" style="background: linear-gradient(90deg, #00A2FF, #00d2ff);">GEOMETRY JUMP</span></h1>
+        </div>
+
+        <div id="game-container" class="fade-in" style="transition-delay: 0.3s;">
+            <div class="stats">SCORE: <span id="score">0</span> | BEST: <span id="high-score">0</span></div>
+            
+            <div id="start-overlay" class="game-overlay">
+                <h2>READY?</h2>
+                <p>Klikni nebo stiskni MEZERNÍK</p>
+                <button class="play-btn" onclick="startGame()">START</button>
+            </div>
+
+            <div id="game-over-overlay" class="game-overlay" style="display: none;">
+                <h2>KONEC HRY</h2>
+                <p id="final-score">Skóre: 0</p>
+                <button class="play-btn" onclick="startGame()">HRÁT ZNOVU</button>
+            </div>
+
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <div class="fade-in" style="margin-top: 3rem; text-align: center; transition-delay: 0.5s;">
+            <a href="games.html" class="nav-brand" style="display: inline-flex; text-decoration: none;">
+                <span style="font-family: 'Orbitron', sans-serif;">ZPĚT DO MENU</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const highScoreEl = document.getElementById('high-score');
+        const finalScoreEl = document.getElementById('final-score');
+        const startOverlay = document.getElementById('start-overlay');
+        const gameOverOverlay = document.getElementById('game-over-overlay');
+
+        let player, obstacles, gameRunning = false, score = 0, gameSpeed = 6;
+        let highScore = parseInt(localStorage.getItem('geoHighScore')) || 0;
+        highScoreEl.innerText = highScore;
+
+        function initGame() {
+            player = {
+                x: 100,
+                y: canvas.height - 40,
+                width: 30,
+                height: 30,
+                dy: 0,
+                jumpForce: -12,
+                gravity: 0.6,
+                grounded: true,
+                rotation: 0
+            };
+            obstacles = [];
+            score = 0;
+            gameSpeed = 6;
+            scoreEl.innerText = score;
+            gameRunning = true;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowUp') jump();
+        });
+        canvas.addEventListener('mousedown', jump);
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.dy = player.jumpForce;
+                player.grounded = false;
+            }
+        }
+
+        function createObstacle() {
+            if (Math.random() < 0.02) {
+                let type = Math.random() > 0.5 ? 'triangle' : 'square';
+                obstacles.push({
+                    x: canvas.width,
+                    y: canvas.height - 40,
+                    width: 30,
+                    height: 30,
+                    type: type
+                });
+            }
+        }
+
+        function update() {
+            if (!gameRunning) return;
+
+            // Player physics
+            player.dy += player.gravity;
+            player.y += player.dy;
+
+            if (player.y + player.height > canvas.height - 10) {
+                player.y = canvas.height - 10 - player.height;
+                player.dy = 0;
+                player.grounded = true;
+                player.rotation = 0;
+            } else {
+                player.rotation += 0.1;
+            }
+
+            // Obstacles
+            createObstacle();
+            obstacles.forEach((obs, index) => {
+                obs.x -= gameSpeed;
+
+                // Collision
+                if (player.x < obs.x + obs.width &&
+                    player.x + player.width > obs.x &&
+                    player.y < obs.y + obs.height &&
+                    player.y + player.height > obs.y) {
+                    gameOver();
+                }
+
+                if (obs.x + obs.width < 0) {
+                    obstacles.splice(index, 1);
+                    score++;
+                    scoreEl.innerText = score;
+                    if (score > highScore) {
+                        highScore = score;
+                        highScoreEl.innerText = highScore;
+                        localStorage.setItem('geoHighScore', highScore);
+                    }
+                    if (score % 10 === 0) gameSpeed += 0.2;
+                }
+            });
+
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Ground
+            ctx.strokeStyle = "#00A2FF";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 10);
+            ctx.lineTo(canvas.width, canvas.height - 10);
+            ctx.stroke();
+
+            // Player
+            ctx.save();
+            ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
+            ctx.rotate(player.rotation);
+            ctx.fillStyle = "#00A2FF";
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#00A2FF";
+            ctx.fillRect(-player.width / 2, -player.height / 2, player.width, player.height);
+            ctx.restore();
+
+            // Obstacles
+            ctx.fillStyle = "#ff0080";
+            ctx.shadowColor = "#ff0080";
+            obstacles.forEach(obs => {
+                if (obs.type === 'triangle') {
+                    ctx.beginPath();
+                    ctx.moveTo(obs.x, obs.y + obs.height);
+                    ctx.lineTo(obs.x + obs.width / 2, obs.y);
+                    ctx.lineTo(obs.x + obs.width, obs.y + obs.height);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                }
+            });
+            ctx.shadowBlur = 0;
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            finalScoreEl.innerText = "Skóre: " + score;
+            gameOverOverlay.style.display = 'flex';
+        }
+
+        function startGame() {
+            startOverlay.style.display = 'none';
+            gameOverOverlay.style.display = 'none';
+            initGame();
+            update();
+        }
+    </script>
+</body>
+
+</html>

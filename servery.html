@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Servery</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .server-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 30px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .server-card:hover {
+            border-color: #ec4899;
+            box-shadow: 0 0 50px rgba(236, 72, 153, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .server-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .status-dot-pulse {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .ip-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ip-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #ec4899;
+        }
+
+        .copy-hint {
+            color: #ec4899;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .server-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 3rem;
+        }
+
+        .info-stat {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+
+        .info-stat span {
+            display: block;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-stat strong {
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        /* Nav Colors Override */
+        .nav-item.active { color: #ec4899 !important; text-shadow: 0 0 15px rgba(236, 72, 153, 0.5) !important; }
+    </style>
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item active">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient" style="background: radial-gradient(circle at top, rgba(236, 72, 153, 0.05) 0%, #050505 100%);"></div>
+
+    <main class="links-container" style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <!-- Header -->
+        <div class="links-header fade-in floating" style="margin-bottom: 2.5rem;">
+            <svg class="social-icon-main" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: #ec4899;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            <h1><span style="background: linear-gradient(90deg, #ec4899, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SERVERY</span></h1>
+        </div>
+
+        <div class="fade-in" style="transition-delay: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 40px; width: 100%;">
+            <!-- Main Empty Frame -->
+            <div class="server-card" style="width: 100%; max-width: 800px; height: 350px; display: flex; justify-content: center; align-items: center; border-style: dashed; border-width: 3px;">
+                <div style="text-align: center; color: rgba(255,255,255,0.1);">
+                    <svg viewBox="0 0 24 24" width="80" height="80" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <p style="font-family: 'Orbitron', sans-serif; margin-top: 1rem; letter-spacing: 5px;">MIMOPROVOZ</p>
+                </div>
+            </div>
+
+            <!-- Coming Soon Text -->
+            <div style="text-align: center; margin-top: 1rem;">
+                <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 2.5rem; text-shadow: 0 0 20px #ec4899;">JIŽ BRZY</h2>
+                <p style="color: rgba(255,255,255,0.4); font-size: 1.1rem; margin-top: 1rem;">Právě pracujeme na zprovoznění našich herních portálů.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer fade-in" style="transition-delay: 0.8s;">
+            <div class="footer-line" style="background: #ec4899; box-shadow: 0 0 10px #ec4899;"></div>
+            <p class="footer-text">© 2026 MATESCZ · VŠECHNA PRÁVA VYHRAZENA</p>
+        </footer>
+    </main>
+
+    <script>
+        function copyIP() {
+            const ip = "xelorialand.cz";
+            navigator.clipboard.writeText(ip);
+            
+            const hint = document.getElementById('copy-status');
+            const original = hint.innerText;
+            
+            hint.innerText = "IP ZKOPÍROVÁNA!";
+            hint.style.color = "#10b981";
+            
+            setTimeout(() => {
+                hint.innerText = original;
+                hint.style.color = "#ec4899";
+            }, 2000);
+        }
+    </script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | FAQ</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .faq-item.active .faq-question h3 {
+            color: #ffd700;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: #ffd700;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+        }
+
+        .answer-content {
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            font-size: 1rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .answer-content strong {
+            color: #ffd700;
+        }
+    </style>
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item active">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"
+        style="background: radial-gradient(circle at top, rgba(255, 215, 0, 0.05) 0%, #050505 100%);"></div>
+
+    <main class="links-container"
+        style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <!-- Header -->
+        <div class="links-header fade-in floating" style="margin-bottom: 2rem;">
+            <svg class="social-icon-main" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                style="color: #ffd700;">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+            </svg>
+            <h1><span
+                    style="background: linear-gradient(90deg, #ffd700, #ffa500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ČASTÉ
+                    DOTAZY</span></h1>
+        </div>
+
+        <div class="faq-container fade-in" style="transition-delay: 0.2s;">
+            <script>
+                const faqItems = [
+                    { q: "Kolik ti je let?", a: "Je mi 14 let." },
+                    { q: "Jak dlouho programuješ?", a: "Programování se věnuji asi 2 roky. Baví mě hlavně webový vývoj a tvorba Discord botů." },
+                    { q: "Jaký je tvůj nejoblíbenější programovací jazyk?", a: "Nejraději mám <strong>JavaScript</strong> a HTML/CSS, protože u nich okamžitě vidím výsledek své práce." },
+                    { q: "Na čem běží tvůj Minecraft server?", a: "Náš server <strong>XELORIALAND.CZ</strong> běží na výkonném dedikovaném hardwaru, aby byl zajištěn plynulý zážitek pro všechny hráče." },
+                    { q: "Jaké jsou tvé nejoblíbenější hry kromě Minecraftu?", a: "Rád si zahraju Roblox & Hororovky a klidně my summer car rocket league a další.." },
+                    { q: "Jak vznikla přezdívka Matescz_?", a: "Je to prostě variace mého jména, která byla volná a dobře se pamatuje!" },
+                    { q: "Plánuješ nějaké velké updaty pro tento web?", a: "Ano! V budoucnu chci přidat více interaktivních miniher a ucelenější galerii mých vývojářských projektů." },
+                    { q: "Odkud čerpáš inspiraci pro své projekty?", a: "Sleduji moderní trendy v UI/UX designu a inspiruji se potřebami komunity na mém Discordu." },
+                    { q: "Můžu se k tobě přidat do týmu?", a: "Všechny nábory na moderátory nebo developery probíhají přes můj <strong>Discord server</strong>. Určitě ho sleduj!" },
+                    { q: "Jaký používáš editor na kód?", a: "Mým hlavním nástrojem je <strong>Visual Studio Code</strong> s tmavým tématem a užitečnými pluginy." },
+                    { q: "Máš nějaký YouTube kanál?", a: "Ano, na mém YouTube najdeš tutoriály i herní obsah. Odkazy najdeš v sekci <strong>Odkazy</strong>." },
+                    { q: "Jak často streamuješ?", a: "Zatím nepravidelně, ale snažím se vysílat hlavně o víkendech, kdy mám víc času na interakci s vámi." },
+                    { q: "Co tě nejvíc baví na tvorbě obsahu?", a: "Především ten proces tvorby něčeho nového a následná zpětná vazba od lidí, kterou mě to posouvá dál." },
+                    { q: "Jakou hudbu posloucháš při práci?", a: "Nejčastěji lo-fi beaty pro soustředění nebo moderní tracky, které najdeš i v mém hudebním přehrávači na webu." },
+                    { q: "Jak ses naučil dělat weby?", a: "Jsem samouk. Naučil jsem se to pomocí online tutoriálů, dokumentace a hlavně zkoušením věcí přímo v praxi." },
+                    { q: "Máš nějaký osobní cíl pro tento rok?", a: "Mým cílem je dál se zdokonalovat v JavaScriptu a vybudovat stabilní komunitu kolem mých projektů." },
+                    { q: "Jaký je tvůj nejoblíbenější Minecraft block?", a: "Jednoznačně <strong>Diamond block</strong> – je to klasika, která v designech vypadá prostě prémiově." },
+                    { q: "Jak tě můžu kontaktovat ohledně spolupráce?", a: "Nejlepší cesta je vyplnit formulář v sekci <strong>Kontakt</strong>, nebo mě oslovit přímo na Discordu." },
+                    { q: "Proč jsi si vybral právě neonově zelenou a zlatou barvu?", a: "Tyto barvy mi přijdou moderní, čisté a skvěle se hodí k technologickému a hernímu zaměření mého webu." },
+                    { q: "Co bys vzkázal začínajícím tvůrcům?", a: "Nebojte se dělat chyby. Každý nefunkční kód vás naučí víc než ten, který se povede hned napoprvé!" }
+                ];
+
+                faqItems.forEach((item) => {
+                    document.write(`
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <h3>` + item.q + `</h3>
+                                <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="answer-content">` + item.a + `</div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer fade-in" style="transition-delay: 0.8s;">
+            <div class="footer-line" style="background: #ffd700; box-shadow: 0 0 10px #ffd700;"></div>
+            <p class="footer-text">© 2026 MATESCZ · VŠECHNA PRÁVA VYHRAZENA</p>
+        </footer>
+    </main>
+
+    <script>
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+
+            // Close other items
+            const allItems = document.querySelectorAll('.faq-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+        }
+    </script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

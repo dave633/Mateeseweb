@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Hra - Neon Breakout</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        #game-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #f5af02;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(245, 175, 2, 0.2);
+            overflow: hidden;
+            margin-top: 2rem;
+            width: 800px;
+            height: 500px;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+            display: none;
+        }
+
+        .game-overlay h2 {
+            font-size: 3rem;
+            color: #f5af02;
+            text-shadow: 0 0 20px rgba(245, 175, 2, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            background: #f5af02;
+            color: #000;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 1rem;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(245, 175, 2, 0.4);
+        }
+
+        .stats {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: #f5af02;
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item active">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <main class="links-container" style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <div class="links-header fade-in floating" style="margin-bottom: 1rem;">
+            <h1><span class="social-gradient-text" style="background: linear-gradient(90deg, #f5af02, #ff8800);">NEON BREAKOUT</span></h1>
+        </div>
+
+        <div id="game-container" class="fade-in" style="transition-delay: 0.3s;">
+            <div class="stats">SCORE: <span id="score">0</span></div>
+            <div id="start-overlay" class="game-overlay" style="display: flex;">
+                <h2>READY?</h2>
+                <button class="play-btn" onclick="startGame()">START</button>
+            </div>
+            <div id="game-over-overlay" class="game-overlay">
+                <h2>KONEC HRY</h2>
+                <p id="final-score">Skóre: 0</p>
+                <button class="play-btn" onclick="startGame()">HRÁT ZNOVU</button>
+            </div>
+            <div id="win-overlay" class="game-overlay">
+                <h2>VÍTĚZSTVÍ!</h2>
+                <p>Vyčistil jsi všechny bloky!</p>
+                <button class="play-btn" onclick="startGame()">DALŠÍ ÚROVEŇ</button>
+            </div>
+            <canvas id="gameCanvas" width="800" height="500"></canvas>
+        </div>
+
+        <div class="fade-in" style="margin-top: 3rem; text-align: center; transition-delay: 0.5s;">
+            <a href="games.html" class="nav-brand" style="display: inline-flex; text-decoration: none;">
+                <span style="font-family: 'Orbitron', sans-serif;">ZPĚT DO MENU</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const finalScoreEl = document.getElementById('final-score');
+        const startOverlay = document.getElementById('start-overlay');
+        const gameOverOverlay = document.getElementById('game-over-overlay');
+        const winOverlay = document.getElementById('win-overlay');
+
+        // Game Constants
+        let paddleHeight = 15;
+        let paddleWidth = 120;
+        let ballRadius = 8;
+        let brickRowCount = 5;
+        let brickColumnCount = 9;
+        let brickWidth = 75;
+        let brickHeight = 25;
+        let brickPadding = 10;
+        let brickOffsetTop = 50;
+        let brickOffsetLeft = 20;
+
+        // Game Variables
+        let x, y, dx, dy, paddleX, score, bricks, gameRunning = false;
+
+        function initGame() {
+            x = canvas.width / 2;
+            y = canvas.height - 30;
+            dx = 4;
+            dy = -4;
+            paddleX = (canvas.width - paddleWidth) / 2;
+            score = 0;
+            scoreEl.innerText = score;
+            
+            bricks = [];
+            for (let c = 0; c < brickColumnCount; c++) {
+                bricks[c] = [];
+                for (let r = 0; r < brickRowCount; r++) {
+                    bricks[c][r] = { x: 0, y: 0, status: 1 };
+                }
+            }
+        }
+
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+
+        function mouseMoveHandler(e) {
+            let relativeX = e.clientX - canvas.getBoundingClientRect().left;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth / 2;
+            }
+        }
+
+        function collisionDetection() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    let b = bricks[c][r];
+                    if (b.status == 1) {
+                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                            dy = -dy;
+                            b.status = 0;
+                            score += 10;
+                            scoreEl.innerText = score;
+                            if (score == brickRowCount * brickColumnCount * 10) {
+                                gameRunning = false;
+                                winOverlay.style.display = 'flex';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "#fff";
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#f5af02";
+            ctx.fill();
+            ctx.closePath();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.rect(paddleX, canvas.height - paddleHeight - 10, paddleWidth, paddleHeight);
+            ctx.fillStyle = "#f5af02";
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#f5af02";
+            ctx.fill();
+            ctx.closePath();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawBricks() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status == 1) {
+                        let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = `hsl(${r * 40}, 80%, 50%)`;
+                        ctx.shadowBlur = 5;
+                        ctx.shadowColor = `hsl(${r * 40}, 80%, 50%)`;
+                        ctx.fill();
+                        ctx.closePath();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
+        }
+
+        function draw() {
+            if (!gameRunning) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBricks();
+            drawBall();
+            drawPaddle();
+            collisionDetection();
+
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+            if (y + dy < ballRadius) {
+                dy = -dy;
+            } else if (y + dy > canvas.height - ballRadius - 10) {
+                if (x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;
+                    // Increase speed slightly
+                    dx *= 1.05;
+                    dy *= 1.05;
+                } else if (y + dy > canvas.height - ballRadius) {
+                    gameRunning = false;
+                    finalScoreEl.innerText = "Skóre: " + score;
+                    gameOverOverlay.style.display = 'flex';
+                }
+            }
+
+            x += dx;
+            y += dy;
+            requestAnimationFrame(draw);
+        }
+
+        function startGame() {
+            initGame();
+            gameRunning = true;
+            startOverlay.style.display = 'none';
+            gameOverOverlay.style.display = 'none';
+            winOverlay.style.display = 'none';
+            draw();
+        }
+    </script>
+</body>
+
+</html>

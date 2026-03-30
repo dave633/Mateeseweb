@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | O mně</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="about-page">
+
+                    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item active">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="blob"></div>
+
+    <main class="about-container-page">
+        <div class="about-hero reveal">
+            <div class="about-profile">
+                <img src="https://mc-heads.net/player/Matescz_" alt="Matescz_ Skin" class="about-skin">
+            </div>
+            <div class="about-main-text">
+                <h1>Ahoj, já jsem <span class="highlight">Matescz_</span></h1>
+                <p class="about-intro">Vítejte na mé osobní stránce. Jsem tvůrce, programátor a nadšenec do technologií, který rád buduje digitální projekty.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">5+</span>
+                        <span class="stat-label">Let zkušeností</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">20+</span>
+                        <span class="stat-label">Projektů</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-content-grid">
+            <div class="about-card-modern reveal" style="transition-delay: 0.1s;">
+                <div class="card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                    <h2>Programování</h2>
+                </div>
+                <p>Můj kód je čistý, rychlý a efektivní. Zaměřuji se na moderní technologie, které hýbou světem.</p>
+                <ul class="skills-list">
+                    <li>HTML5 & CSS3</li>
+                    <li>JavaScript (Node.js)</li>
+                    <li>Discord Bot Development</li>
+                    <li>Frontend Design</li>
+                </ul>
+            </div>
+
+            <div class="about-card-modern reveal" style="transition-delay: 0.2s;">
+                <div class="card-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4m8-2h.01M16 12h.01"/></svg>
+                    <h2>Gaming & Servery</h2>
+                </div>
+                <p>Minecraft není jen hra, je to prostor pro kreativitu. Stavím a spravuji komunity, kde se lidé cítí dobře.</p>
+                <ul class="skills-list">
+                    <li>Server Administration</li>
+                    <li>XeloriaLand Management</li>
+                    <li>Community Building</li>
+                    <li>Game Logic Design</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about-footer-btn-container reveal">
+            <a href="index.html" class="btn">Zpět domů</a>
+        </div>
+    </main>
+
+    
+    <script src="auth.js"></script>
+    <script>
+        // Reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

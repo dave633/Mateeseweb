@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matescz_ | Podpora</title>
+    <link rel="icon" href="https://mc-heads.net/avatar/Matescz_/100" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .ticket-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .ticket-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ticket-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ticket-input-group label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: #ffd700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .ticket-input, .ticket-select, .ticket-textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-input:focus, .ticket-select:focus, .ticket-textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .ticket-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .ticket-submit-btn {
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            color: black;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .ticket-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .ticket-submit-btn:disabled {
+            filter: grayscale(1);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .auth-warning {
+            text-align: center;
+            padding: 2rem;
+            border: 1px dashed rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .auth-warning p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .status-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            color: #10b981;
+            display: block;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="links-page">
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html">
+                <img src="https://mc-heads.net/avatar/Matescz_/100" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-center">
+            <a href="about.html" class="nav-item">👤 O mně</a>
+            <a href="links.html" class="nav-item">🔗 Odkazy</a>
+            <a href="games.html" class="nav-item">🎮 Hry</a>
+            <a href="programovani.html" class="nav-item">💻 Kód</a>
+            <a href="galerie.html" class="nav-item">📸 Galerie</a>
+            <a href="servery.html" class="nav-item">🌍 Servery</a>
+            <a href="faq.html" class="nav-item">❓ FAQ</a>
+            <a href="tickets.html" class="nav-item active">🎫 Tickety</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-item login-trigger">🔑 Login</a>
+            <a href="kontakt.html" class="nav-item">✉️ Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="bg-gradient"
+        style="background: radial-gradient(circle at top, rgba(255, 215, 0, 0.05) 0%, #050505 100%);"></div>
+
+    <main class="links-container"
+        style="display: flex; flex-direction: column; align-items: center; padding-top: 100px;">
+        <!-- Header -->
+        <div class="links-header fade-in floating" style="margin-bottom: 1rem;">
+            <svg class="social-icon-main" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                style="color: #ffd700;">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16ZM11 12H13V14H11V12ZM11 6H13V10H11V6Z"/>
+            </svg>
+            <h1><span
+                    style="background: linear-gradient(90deg, #ffd700, #ffa500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">PODPORA</span></h1>
+        </div>
+        <p class="fade-in" style="color: rgba(255, 255, 255, 0.6); text-align: center; max-width: 500px; margin-bottom: 2rem;">Máš problém v naší komunitě, na Discordu nebo na webu? Založ si ticket a náš tým se na to podívá.</p>
+
+        <div id="ticketContainer" class="fade-in" style="width: 100%; display: flex; justify-content: center;">
+            <!-- Will be populated by JS -->
+            <div class="auth-warning">
+                <p>Pro založení ticketu se musíš nejdříve přihlásit.</p>
+                <button onclick="document.dispatchEvent(new CustomEvent('openAuth'))" class="auth-btn" style="padding: 1rem 2rem;">Přihlásit se</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer fade-in" style="transition-delay: 0.8s;">
+            <div class="footer-line" style="background: #ffd700; box-shadow: 0 0 10px #ffd700;"></div>
+            <p class="footer-text">© 2026 MATESCZ · VŠECHNA PRÁVA VYHRAZENA</p>
+        </footer>
+    </main>
+
+    <script src="auth.js"></script>
+    <script>
+        // --- TICKET DATABASE (Simulated) ---
+        const getTickets = () => JSON.parse(localStorage.getItem('mates_all_tickets')) || [];
+        const saveTicket = (ticket) => {
+            const tickets = getTickets();
+            tickets.unshift(ticket);
+            localStorage.setItem('mates_all_tickets', JSON.stringify(tickets));
+        };
+        const updateTicketStatus = (id, status, reply = null) => {
+            let tickets = getTickets();
+            const idx = tickets.findIndex(t => t.id === id);
+            if (idx !== -1) {
+                tickets[idx].status = status;
+                if (reply) {
+                    if (!tickets[idx].replies) tickets[idx].replies = [];
+                    tickets[idx].replies.push(reply);
+                }
+                localStorage.setItem('mates_all_tickets', JSON.stringify(tickets));
+                // Refresh view
+                checkAuth();
+            }
+        };
+
+        // Check for login and render appropriate view
+        function checkAuth() {
+            const container = document.getElementById('ticketContainer');
+            const user = window.currentUser;
+            
+            if (!user) {
+                // Not logged in
+                container.innerHTML = `
+                    <div class="auth-warning">
+                        <p>Pro založení ticketu se musíš nejdříve přihlásit.</p>
+                        <button onclick="document.dispatchEvent(new CustomEvent('openAuth'))" class="auth-btn" style="padding: 1rem 2rem;">Přihlásit se</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const view = urlParams.get('view');
+            const action = urlParams.get('action');
+
+            if (user.isAdmin && (view === 'staff' || view === 'closed')) {
+                renderStaffDashboard(user, view === 'closed');
+            } else if (action === 'new') {
+                renderTicketForm(user);
+            } else {
+                renderMyTickets(user);
+            }
+        }
+
+        // --- DASHBOARD: MOJE TICKETY ---
+        function renderMyTickets(user) {
+            const container = document.getElementById('ticketContainer');
+            const tickets = getTickets().filter(t => t.userEmail === user.email);
+
+            container.innerHTML = `
+                <div class="ticket-list-container">
+                    <div class="dashboard-tabs">
+                        <button class="dash-tab active">Moje Tickety</button>
+                        <button class="dash-tab" onclick="window.location.search = '?action=new'">➕ Nový Ticket</button>
+                    </div>
+                    ${tickets.length === 0 ? '<p style="text-align:center; opacity:0.5;">Zatím nemáš žádné tickety.</p>' : 
+                        tickets.map(t => `
+                        <div class="ticket-item-card" onclick="showTicketDetail('${t.id}')">
+                            <div class="ticket-info">
+                                <span class="ticket-id">#${t.id.slice(0, 8)}</span>
+                                <span class="ticket-subject">${t.subject}</span>
+                                <div class="ticket-meta-small">
+                                    <span>${t.category}</span>
+                                    <span>${new Date(t.timestamp).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-${t.status.toLowerCase().replace(' ', '-')}">${t.status}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // --- DASHBOARD: STAFF PANEL ---
+        function renderStaffDashboard(user, showClosed = false) {
+            const container = document.getElementById('ticketContainer');
+            const allTickets = getTickets();
+            const tickets = showClosed ? allTickets.filter(t => t.status === 'Closed') : allTickets.filter(t => t.status !== 'Closed');
+
+            container.innerHTML = `
+                <div class="ticket-list-container">
+                    <div class="dashboard-tabs">
+                        <button class="dash-tab ${!showClosed ? 'active' : ''}" onclick="window.location.search = '?view=staff'">🛡️ Aktivní Staff List</button>
+                        <button class="dash-tab ${showClosed ? 'active' : ''}" onclick="window.location.search = '?view=closed'">📁 Uzavřené</button>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-bottom: 1rem; color: #00f2ff;">🛡️ Vítej zpět, Supporte. Zde můžeš spravovat dotazy hráčů.</p>
+                    ${tickets.length === 0 ? '<p style="text-align:center; opacity:0.5;">Žádné tickety k vyřízení.</p>' : 
+                        tickets.map(t => `
+                        <div class="ticket-item-card" onclick="showStaffReplyForm('${t.id}')">
+                            <div class="ticket-info">
+                                <span class="ticket-id">User: ${t.username} (#${t.id.slice(0, 8)})</span>
+                                <span class="ticket-subject">${t.subject}</span>
+                                <div class="ticket-meta-small">
+                                    <span>${t.category}</span>
+                                    <span>${new Date(t.timestamp).toLocaleTimeString()}</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-${t.status.toLowerCase().replace(' ', '-')}">${t.status}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // --- FORM: NOVÝ TICKET ---
+        function renderTicketForm(user) {
+            const container = document.getElementById('ticketContainer');
+            container.innerHTML = `
+                <div class="ticket-card">
+                    <div class="dashboard-tabs" style="margin-bottom: 2rem;">
+                        <button class="dash-tab" onclick="window.location.search = ''">🔙 Zpět na seznam</button>
+                    </div>
+                    <form class="ticket-form" id="ticketForm">
+                        <div class="ticket-input-group">
+                            <label>Předmět</label>
+                            <input type="text" id="subject" class="ticket-input" placeholder="Stručný název problému" required>
+                        </div>
+                        
+                        <div class="ticket-input-group">
+                            <label>Typ Ticketu (Proč si chceš vytvořit ticket?)</label>
+                            <select id="type" class="ticket-select" onchange="updateTeamMapping()">
+                                <option value="" disabled selected>Vyber důvod...</option>
+                                <optgroup label="Nahlášení">
+                                    <option value="Nahlášení hráče">🚫 Nahlášení hráče (Hry)</option>
+                                    <option value="Nahlášení uživatele (Discord)">📱 Nahlášení uživatele (Discord)</option>
+                                </optgroup>
+                                <optgroup label="Žádosti">
+                                    <option value="Žádost o zrušení trestu">⚖️ Žádost o zrušení trestu</option>
+                                    <option value="Žádost o Staff / Helpera">🛡️ Žádost o Staff / Helpera</option>
+                                    <option value="Žádost o změnu údajů">📧 Žádost o změnu údajů</option>
+                                    <option value="Žádost o smazání účtu">🗑️ Žádost o smazání účtu</option>
+                                </optgroup>
+                                <optgroup label="Stížnosti">
+                                    <option value="Stížnost na Staff Tým">🛡️ Stížnost na Staff Tým</option>
+                                    <option value="Stížnost na Vedení Komunity">💎 Stížnost na Vedení Komunity</option>
+                                </optgroup>
+                                <optgroup label="Platby">
+                                    <option value="Problémy s platbou / Podpora">💰 Problémy s platbou / Podpora</option>
+                                </optgroup>
+                                <optgroup label="Spolupráce">
+                                    <option value="Nabídka partnerství">🤝 Nabídka partnerství</option>
+                                    <option value="Chci být Creator">🎥 Chci být Creator</option>
+                                </optgroup>
+                                <optgroup label="Ostatní">
+                                    <option value="Návrh na novinku / Zlepšení">💡 Návrh na novinku / Zlepšení</option>
+                                    <option value="Nahlášení chyby (Web/Bot)">🐛 Nahlášení chyby (Web/Bot)</option>
+                                    <option value="Problém s připojením">🌐 Problém s připojením</option>
+                                    <option value="Jiné">✨ Jiné</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="ticket-input-group">
+                            <label>Zaměření (Automatické)</label>
+                            <select id="team" class="ticket-select" style="pointer-events: none; opacity: 0.7;">
+                                <option value="" selected disabled>Čekám na důvod...</option>
+                                <option value="Helper tým">🛡️ Helper tým</option>
+                                <option value="Vedení komunity">💎 Vedení komunity</option>
+                            </select>
+                        </div>
+
+                        <div class="ticket-input-group">
+                            <label>Zpráva</label>
+                            <textarea id="message" class="ticket-textarea" placeholder="Detailní popis tvého problému..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="ticket-submit-btn" id="submitBtn">Odeslat Ticket</button>
+                        <div id="statusResult" class="status-message"></div>
+                    </form>
+                </div>
+            `;
+
+            const form = document.getElementById('ticketForm');
+            form.addEventListener('submit', (e) => handleTicketSubmit(e, user));
+        }
+
+        // --- LOGIKA: ODESLAT TICKET ---
+        async function handleTicketSubmit(e, user) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const statusResult = document.getElementById('statusResult');
+            
+            const ticketData = {
+                id: Math.random().toString(36).substr(2, 10),
+                username: user.username,
+                userEmail: user.email,
+                userRole: user.role || 'Hráč',
+                subject: document.getElementById('subject').value,
+                team: document.getElementById('team').value,
+                type: document.getElementById('type').value,
+                message: document.getElementById('message').value,
+                status: 'Open',
+                timestamp: new Date().toISOString(),
+                replies: []
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Odesílám...';
+
+            // 1. SAVE LOCALLY
+            saveTicket(ticketData);
+
+            // 2. DISCORD WEBHOOK
+            const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487965245917106268/VSDr3vzAEJRYZhyCI0yrnwBTNI-OGZ9yewGOJM2PVix6S7h3sueHjN76beXpQikZhZ8z'; 
+
+            if (WEBHOOK_URL) {
+                try {
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            content: `🎫 **Nový Ticket přes Web**`,
+                            embeds: [{
+                                title: ticketData.subject,
+                                color: 16766464, // Gold
+                                fields: [
+                                    { name: 'Uživatel', value: `${ticketData.username} (${ticketData.userEmail})`, inline: true },
+                                    { name: 'Zaměření', value: ticketData.team, inline: true },
+                                    { name: 'Typ', value: ticketData.type, inline: true },
+                                    { name: 'Zpráva', value: ticketData.message }
+                                ],
+                                timestamp: ticketData.timestamp
+                            }]
+                        })
+                    });
+                } catch (err) { console.error('Discord error:', err); }
+            }
+
+            statusResult.innerText = 'Ticket vytvořen! Můžeš ho sledovat ve svém seznamu.';
+            statusResult.className = 'status-message status-success';
+            submitBtn.innerText = 'HOTOVO';
+            
+            setTimeout(() => {
+                window.location.search = ''; // Back to My Tickets
+            }, 1000);
+        }
+
+        // --- HELPERS: UI COMPONENTS ---
+        function getRoleBadge(role) {
+            const roleClass = role.toLowerCase().replace(' ', '');
+            return `<span class="role-badge role-${roleClass}">${role}</span>`;
+        }
+
+        function renderChatMessage(name, role, text, timestamp, isStaff = false) {
+            const avatar = `https://mc-heads.net/avatar/${name}/100`;
+            return `
+                <div class="chat-message">
+                    <img src="${avatar}" class="chat-avatar">
+                    <div class="chat-content ${isStaff ? 'staff-reply-bubble' : ''}">
+                        <div class="chat-header">
+                            ${getRoleBadge(role)}
+                            <span class="chat-username">${name}</span>
+                            <span class="chat-time">${new Date(timestamp).toLocaleString()}</span>
+                        </div>
+                        <div class="chat-text">${text}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- USER: DETAIL TICKETU ---
+        function showTicketDetail(id) {
+            const ticket = getTickets().find(t => t.id === id);
+            const container = document.getElementById('ticketContainer');
+            
+            container.innerHTML = `
+                <div class="ticket-card" style="max-width: 800px; padding: 2rem;">
+                    <div class="dashboard-tabs">
+                        <button class="dash-tab" onclick="window.location.search = ''">🔙 Zpět na moje tickety</button>
+                    </div>
+                    
+                    <div style="margin: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem;">
+                        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Ticket #${id.slice(0, 8)}</h2>
+                        <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.6);">
+                            <span>📅 ${new Date(ticket.timestamp).toLocaleDateString()}</span>
+                            <span>🎯 ${ticket.team}</span>
+                            <span>📂 ${ticket.type}</span>
+                        </div>
+                    </div>
+
+                    <div class="ticket-chat-container">
+                        <!-- Původní zpráva -->
+                        ${renderChatMessage(ticket.username, ticket.userRole || 'Hráč', ticket.message, ticket.timestamp)}
+
+                        <!-- Odpovědi -->
+                        ${(!ticket.replies || ticket.replies.length === 0) ? 
+                            '<p style="opacity:0.5; font-size:0.9rem; margin: 1rem 0; text-align:center;">Zatím žádná odpověď od supportu. Prosím o strpení. 😊</p>' : 
+                            ticket.replies.map(r => renderChatMessage(r.admin, r.role || 'Support', r.text, r.timestamp, true)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- STAFF: ODPOVĚĎ ---
+        function showStaffReplyForm(id) {
+            const ticket = getTickets().find(t => t.id === id);
+            const container = document.getElementById('ticketContainer');
+            
+            container.innerHTML = `
+                <div class="ticket-card" style="max-width: 800px; padding: 2rem;">
+                    <div class="dashboard-tabs">
+                        <button class="dash-tab" onclick="window.location.search = '?view=staff'">🔙 Zpět na list</button>
+                    </div>
+                    
+                    <div style="margin: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem;">
+                        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Správa Ticketu #${id.slice(0, 8)}</h2>
+                        <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.6);">
+                            <span>👤 ${ticket.username}</span>
+                            <span>🎯 ${ticket.team}</span>
+                            <span>📂 ${ticket.type}</span>
+                        </div>
+                    </div>
+
+                    <div class="ticket-chat-container">
+                        <!-- Původní zpráva -->
+                        ${renderChatMessage(ticket.username, 'Hráč', ticket.message, ticket.timestamp)}
+
+                        <!-- Historie Historie -->
+                        ${ticket.replies && ticket.replies.length > 0 ? 
+                            ticket.replies.map(r => renderChatMessage(r.admin, r.role || 'Support', r.text, r.timestamp, true)).join('') 
+                            : ''}
+                    </div>
+
+                    <div class="staff-reply-box" style="margin-top: 2rem;">
+                        <label style="color: #00f2ff; font-family: 'Orbitron'; font-size: 0.8rem;">Tvá odpověď:</label>
+                        <textarea id="staffReply" class="staff-reply-textarea" placeholder="Napiš odpověď hráči..."></textarea>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <label style="color: rgba(255,255,255,0.5); font-size: 0.75rem;">Odeslat jako roli:</label>
+                            <select id="staffRole" class="ticket-select" style="padding: 0.5rem; font-size: 0.8rem; margin-top: 0.3rem; width: auto;">
+                                <option value="Support">Support</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Vedení">Vedení</option>
+                                <option value="Co-Owner">Co-Owner</option>
+                                <option value="Owner">Owner</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="auth-btn" style="background:#3b82f6; flex:1;" onclick="handleStaffReply('${id}')">Odeslat Odpověď</button>
+                            ${ticket.status !== 'Closed' ? `<button class="auth-btn" style="background:#ef4444;" onclick="handleStaffReply('${id}', true)">Uzavřít Ticket</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.handleStaffReply = (id, close = false) => {
+            const replyText = document.getElementById('staffReply').value;
+            const role = document.getElementById('staffRole').value;
+            if (!replyText && !close) return alert('Napiš text odpovědi!');
+            
+            const status = close ? 'Closed' : 'Staff Reply';
+            const reply = replyText ? {
+                admin: window.currentUser.username,
+                role: role,
+                text: replyText,
+                timestamp: new Date().toISOString()
+            } : null;
+
+            updateTicketStatus(id, status, reply);
+            alert(close ? 'Ticket uzavřen.' : 'Odpověď odeslána.');
+        };
+
+        // --- AUTOMATICKÉ MAPOVÁNÍ TÝMŮ ---
+        window.updateTeamMapping = () => {
+            const typeSelect = document.getElementById('type');
+            const teamSelect = document.getElementById('team');
+            if (!typeSelect || !teamSelect) return;
+
+            const type = typeSelect.value;
+            if (!type) return;
+            
+            // Definice typů pro Helper Tým
+            const helperTypes = [
+                'Nahlášení hráče', 
+                'Nahlášení uživatele (Discord)', 
+                'Žádost o zrušení trestu', 
+                'Žádost o Staff / Helpera', 
+                'Stížnost na Staff Tým', 
+                'Nahlášení chyby (Web/Bot)', 
+                'Problém s připojením'
+            ];
+
+            if (helperTypes.includes(type)) {
+                teamSelect.value = 'Helper tým';
+            } else {
+                teamSelect.value = 'Vedení komunity';
+            }
+        };
+
+        // Initialize
+        window.addEventListener('load', checkAuth);
+        document.addEventListener('loginSuccess', checkAuth);
+    </script>
+</body>
+
+</html>
